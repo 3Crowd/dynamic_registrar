@@ -1,0 +1,31 @@
+PATH
+  remote: .
+  specs:
+    dynamic_registrar (0.0.developer)
+      cover_me (~> 1.0.0.rc4)
+      parallel_tests (~> 0.4.9)
+      yard (~> 0.6.3)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    configatron (2.6.4)
+      yamler (>= 0.1.0)
+    cover_me (1.0.0.rc4)
+      configatron
+      hashie
+    hashie (0.4.0)
+    parallel (0.5.1)
+    parallel_tests (0.4.9)
+      parallel
+    yamler (0.1.0)
+    yard (0.6.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cover_me (~> 1.0.0.rc4)
+  dynamic_registrar!
+  parallel_tests (~> 0.4.9)
+  yard (~> 0.6.3)

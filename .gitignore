@@ -1,0 +1,7 @@
+.yardoc
+doc
+coverage.data
+coverage
+*~
+pkg
+.bundle
