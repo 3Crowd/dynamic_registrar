@@ -6,7 +6,7 @@ in which they are run.
 Example
 =======
 
-    master_registrar = Registrar.find_or_create :registrar_name => :master
+    master_registrar = Registrar.new
 
     master_registrar.default_registration_namespace = :test
 
