@@ -14,7 +14,11 @@ module DynamicRegistrar
     attr_reader :default_registration_namespace
     
     # The collection of callbacks currently registered within the Registrar
-    attr_reader :registered_callbacks
+    def registered_callbacks
+      @@registration_guard.synchronize do
+        @registered_callbacks
+      end
+    end
     
     # Create a new DynamicRegistrar::Registrar
     # @param [ Symbol ] default_registration_namespace The default namespace in which to register callbacks. Should not be set to nil.
