@@ -1,7 +1,6 @@
 The capability registrar allows modules to register versioned callbacks. Callbacks may only be
-registered once per registration_namespace. If mutliple callbacks registration is attempted a
-MultipleRegistrationError will be raised. Callback lambdas have access to the scope
-in which they are run.
+registered once per registration namespace. If multiple callback registration is attempted a
+RegistrationConflictError will be raised.
 
 Example
 =======
