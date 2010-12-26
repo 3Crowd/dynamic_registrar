@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     dynamic_registrar (0.0.developer)
+      ZenTest (~> 4.4.2)
       cover_me (~> 1.0.0.rc4)
       parallel_tests (~> 0.4.9)
       yard (~> 0.6.3)
@@ -9,6 +10,7 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    ZenTest (4.4.2)
     configatron (2.6.4)
       yamler (>= 0.1.0)
     cover_me (1.0.0.rc4)
@@ -25,6 +27,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ZenTest (~> 4.4.2)
   cover_me (~> 1.0.0.rc4)
   dynamic_registrar!
   parallel_tests (~> 0.4.9)

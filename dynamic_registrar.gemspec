@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'yard', '~> 0.6.3'
   s.add_dependency 'cover_me', '~> 1.0.0.rc4'
   s.add_dependency 'parallel_tests', '~> 0.4.9'
+  s.add_dependency 'ZenTest', '~> 4.4.2'
 end
