@@ -25,6 +25,10 @@ class DynamicRegistrarRegistrarTest < MiniTest::Unit::TestCase
     assert_includes DynamicRegistrar::Registrar.instance_methods, 'registered_in_namespace?'.to_sym
   end
   
+  def test_has_dispatch_method
+    assert_includes DynamicRegistrar::Registrar.instance_methods, :dispatch
+  end
+  
   def test_register_method_adds_given_parameters_to_registered_callbacks
     registrar = DynamicRegistrar::Registrar.new :test_namespace
     assert_empty registrar.registered_callbacks
@@ -51,6 +55,58 @@ class DynamicRegistrarRegistrarTest < MiniTest::Unit::TestCase
         #empty block to match interface
       end
     end
+  end
+  
+  def test_dispatching_call_to_one_named_callback_dispatches_to_all_registered_namespaces
+    registrar = DynamicRegistrar::Registrar.new(:default)
+    test_callback_namespace_one_called = false
+    registrar.register! :test_callback, :test_namespace_one do
+      test_callback_namespace_one_called = true
+    end
+    test_callback_namespace_two_called = false
+    registrar.register! :test_callback, :test_namespace_two do
+      test_callback_namespace_two_called = true
+    end
+    registrar.dispatch :test_callback
+    assert test_callback_namespace_one_called, 'Dispatching to test_callback with all namespaces did not run callback for namespace_one'
+    assert test_callback_namespace_two_called, 'Dispatching to test_callback with all namespaces did not run callback for namespace_two'
+  end
+  
+  def test_dispatching_call_to_one_named_callback_in_named_namespace_dispatches_to_only_that_callback
+    registrar = DynamicRegistrar::Registrar.new(:default)
+    test_callback_namespace_one_called = false
+    registrar.register! :test_callback, :test_namespace_one do
+      test_callback_namespace_one_called = true
+    end
+    
+    test_callback_namespace_two_called = false
+    registrar.register! :test_callback, :test_namespace_two do
+      test_callback_namespace_two_called = true
+    end
+    
+    registrar.dispatch :test_callback, :test_namespace_one
+    
+    assert test_callback_namespace_one_called, 'Dispatching to test_callback with test_namespace_one namespace did not run callback for namespace_one'
+    refute test_callback_namespace_two_called, 'Dispatching to test_callback with test_namespace_one namespace called callback for namespace_two'
+  end
+  
+  def test_callbacks_return_output_in_known_format
+    registrar = DynamicRegistrar::Registrar.new(:default)
+    registrar.register! :test_callback, :test_namespace_one do
+      :aishgaoirhvoi43
+    end
+    registrar.register! :test_callback, :test_namespace_two do
+      :sdo8ivh90r8h034c
+    end
+    
+    responses = registrar.dispatch :test_callback
+    
+    assert_includes responses.keys, :test_namespace_one
+    assert_includes responses.keys, :test_namespace_two
+    assert_includes responses[:test_namespace_one].keys, :test_callback
+    assert_includes responses[:test_namespace_two].keys, :test_callback
+    assert_equal responses[:test_namespace_one][:test_callback], :aishgaoirhvoi43
+    assert_equal responses[:test_namespace_two][:test_callback], :sdo8ivh90r8h034c
   end
 
 end
