@@ -37,10 +37,8 @@ module DynamicRegistrar
     # Dispatch message to given callback. All named callbacks matching the name will 
     # be run in all namespaces in indeterminate order
     # @param [ Symbol ] name The name of the callback 
-    # @param [ Symbol ] namespace The namespace in which the named callback should be found. Optional, if omitted
-    # then all matching named callbacks in all namespaces will be executed
-    # @return [ Hash ] A hash whose keys are the namespaces in which callbacks were executed, and whose
-    # values are the results of those executions. If empty, then no callbacks were executed.
+    # @param [ Symbol ] namespace The namespace in which the named callback should be found. Optional, if omitted then all matching named callbacks in all namespaces will be executed
+    # @return [ Hash ] A hash whose keys are the namespaces in which callbacks were executed, and whose values are the results of those executions. If empty, then no callbacks were executed.
     def dispatch name, namespace = nil
       responses = Hash.new
       namespaces_to_search = namespace ? [namespace] : namespaces
