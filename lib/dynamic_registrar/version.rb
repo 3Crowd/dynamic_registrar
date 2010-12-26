@@ -10,7 +10,7 @@ module DynamicRegistrar
     # Incremented for major feature releases that do not break backwards compatibility
     MINOR = "0"
     # Incremented for minor fixes and updates
-    PATCH = "developer"
+    PATCH = "1"
 
     # Converts the version number held in this module to a human readable string
     # @return [ String ] The BinData version release
